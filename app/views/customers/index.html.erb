@@ -1,0 +1,40 @@
+<div class="container my-5">
+  <div class="row justify-content-between">
+    <h2 class= "font-weight-bold">Clientes</h2>
+    <% if vendor_signed_in? %>
+    <span class="d-flex justify-content-end">
+      <%= link_to 'Nuevo Cliente', new_customer_path, class:"btn btn-primary" %>
+    </span>
+    <% end %>
+  </div>
+  <div class="row my-5">
+      <table class="table">
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td class="metric col-4 text-center">
+                <%= customer.name %>
+              </td>
+
+              <td class="metric col-4 text-center">
+                <%= customer.email %>
+              </td>
+
+              <td class="metric col-4 text-center">
+                <%= customer.phone %>
+              </td>
+
+              <td class="metric col-1 text-right align-bottom">
+                <% if vendor_signed_in? && current_vendor.id == customer.vendor_id  %>
+                  <span class="metric-value">
+                    <%= link_to "Editar", edit_customer_path(customer), class: "fas fa-edit mr-1"%>
+                    <%= link_to "Eliminar", customer, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Cliente?' }  %>
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
