@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_vendor!, except: [:index, :show]
+  before_action :set_customer, only: [:edit, :update, :destroy]
+  before_action :authenticate_vendor!, except: [:index]
 
     def index
       @customers = Customer.all.order(created_at: :desc)
@@ -14,14 +14,10 @@ class CustomersController < ApplicationController
       @customer = Customer.new(customer_params)
       @customer.vendor = current_vendor
       if @customer.save
-        redirect_to customer_path(@customer), notice: 'Cliente creado correctamente.'
+        redirect_to customers_path, notice: 'Cliente creado correctamente.'
       else
         render :new
       end
-    end
-
-    def show
-
     end
 
     def edit
@@ -29,7 +25,7 @@ class CustomersController < ApplicationController
 
     def update
       if @customer.update(customer_params)
-        redirect_to customer_path, notice: 'Cliente editado correctamente.'
+        redirect_to customers_path, notice: 'Cliente editado correctamente.'
       else
         render :edit
       end

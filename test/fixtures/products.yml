@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id         :integer          not null, primary key
+#  width      :decimal(, )
+#  height     :decimal(, )
+#  unit       :decimal(, )
+#  quantity   :decimal(, )
+#  price      :decimal(, )
+#  code       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  width: 9.99
+  height: 9.99
+  unit: 9.99
+  quantity: 9.99
+  price: 9.99
+  code: MyString
+
+two:
+  width: 9.99
+  height: 9.99
+  unit: 9.99
+  quantity: 9.99
+  price: 9.99
+  code: MyString
