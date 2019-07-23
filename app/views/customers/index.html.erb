@@ -8,7 +8,15 @@
     <% end %>
   </div>
   <div class="row my-5">
-      <table class="table">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr class="text-center">
+            <th scope="col-4">Nombre</th>
+            <th scope="col-3">Emial</th>
+            <th scope="col-3">Tel/Cel</th>
+            <th scope="col-2"></th>
+          </tr>
+        </thead>
         <tbody>
           <% @customers.each do |customer| %>
             <tr>
@@ -16,19 +24,19 @@
                 <%= customer.name %>
               </td>
 
-              <td class="metric col-4 text-center">
+              <td class="metric col-3 text-center">
                 <%= customer.email %>
               </td>
 
-              <td class="metric col-4 text-center">
+              <td class="metric col-3 text-center">
                 <%= customer.phone %>
               </td>
 
-              <td class="metric col-1 text-right align-bottom">
+              <td class="metric col-2 text-right align-bottom">
                 <% if vendor_signed_in? && current_vendor.id == customer.vendor_id  %>
                   <span class="metric-value">
-                    <%= link_to "Editar", edit_customer_path(customer), class: "fas fa-edit mr-1"%>
-                    <%= link_to "Eliminar", customer, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Cliente?' }  %>
+                    <%= link_to "", edit_customer_path(customer), class: "fas fa-edit mr-1"%>
+                    <%= link_to "", customer, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Cliente?' }  %>
                   </span>
                 <% end %>
               </td>
