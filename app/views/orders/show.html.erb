@@ -1,0 +1,75 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="card" style="width: 50%;">
+      <div class="card-header">
+        <%= @order.customer.name %>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <table class="table table-hover">
+            <thead class="thead   ">
+              <tr class="text-center">
+                <th scope="col-4">Producto</th>
+                <th scope="col-3">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                  <td class="metric col-4">
+                    <ul>
+                      <li>
+                        <%= @order.vendor.name %>
+                      </li>
+                    </ul>
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <ul>
+                      <li>
+                        <%= @order.customer.name %>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4 text-center">
+                    SUBTOTAL
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= @order.customer.name %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4 text-center">
+                    IVA
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= @order.customer.name %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4 text-center">
+                    TOTAL
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= @order.customer.name %>
+                  </td>
+                </tr>
+
+
+
+            </tbody>
+          </table>
+          <footer class="blockquote-footer"><%= @order.vendor.name %></footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>

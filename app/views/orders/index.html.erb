@@ -1,0 +1,48 @@
+<div class="container my-5">
+  <div class="row justify-content-between">
+    <h2 class= "font-weight-bold">Pedidos</h2>
+    <% if vendor_signed_in? %>
+    <span class="d-flex justify-content-end">
+      <%= link_to 'Nuevo Pedido', new_order_path, class:"btn btn-primary" %>
+    </span>
+    <% end %>
+  </div>
+  <div class="row my-5">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="text-center">
+            <th scope="col-4">Vendedor</th>
+            <th scope="col-3">Cliente</th>
+            <th scope="col-3">Total</th>
+            <th scope="col-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="metric col-4 text-center">
+                <%= order.vendor.name %>
+              </td>
+
+              <td class="metric col-3 text-center">
+                <%= order.customer.name %>
+              </td>
+
+              <td class="metric col-3 text-center">
+                <%= order.total %>
+              </td>
+
+              <td class="metric col-2 text-right align-bottom">
+                <% if vendor_signed_in? && current_vendor.id == order.vendor_id  %>
+                  <span class="metric-value">
+                    <%= link_to "", edit_order_path(order), class: "fas fa-edit mr-1"%>
+                    <%= link_to "", order, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Pedido?' }  %>
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
