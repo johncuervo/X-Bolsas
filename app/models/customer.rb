@@ -13,4 +13,5 @@
 
 class Customer < ApplicationRecord
   belongs_to :vendor
+  has_many :orders
 end

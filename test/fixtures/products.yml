@@ -3,10 +3,10 @@
 # Table name: products
 #
 #  id         :integer          not null, primary key
-#  width      :decimal(, )
-#  height     :decimal(, )
+#  width      :integer
+#  height     :integer
 #  unit       :decimal(, )
-#  quantity   :decimal(, )
+#  quantity   :integer
 #  price      :decimal(, )
 #  code       :string
 #  created_at :datetime         not null

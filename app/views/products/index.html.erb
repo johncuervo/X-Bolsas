@@ -22,9 +22,12 @@
         </thead>
         <tbody>
           <% @products.each do |product| %>
+            <% product.update code: "B-#{product.width}#{product.height}-#{product.quantity}" %>
+            <% product.update price: "#{product.unit * product.quantity}" %>
+
             <tr>
               <td class="metric col-2 text-center">
-                <%= product.code = "B-#{product.width}#{product.height}-#{product.quantity}" %>
+                <%= product.code %>
               </td>
 
               <td class="metric col-2 text-center">
@@ -44,7 +47,7 @@
               </td>
 
               <td class="metric col-1 text-center">
-                <%= number_to_currency(product.price = product.unit * product.quantity, precision: 0) %>
+                <%= number_to_currency(product.price, precision: 0) %>
               </td>
 
               <td class="metric col-1 text-right align-bottom">

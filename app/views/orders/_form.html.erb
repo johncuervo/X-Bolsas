@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <div class="row justify-content-center"">
+    <div class="col-md-10">
+      <div class="order">
+        <h1 class="mb-4"><%= form_title_order %></h1>
+
+        <% if @order.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form_for @order do |f| %>
+
+          <div class="form-group">
+            <h3><%= f.label "Cliente", class:"mr-3" %> </h3>
+            <%= f.collection_select :customer_id, Customer.all, :id, :name %>
+          </div>
+          <hr>
+
+          <div class="form-group pt-0">
+            <h3><%= f.label "Productos:", class:"mr-3" %></h3>
+            <%= f.collection_check_boxes(:product_ids, Product.all, :id, :code) do |b| %>
+             <%= b.label class:"label-checkbox mr-4" do %>
+               <%=b.check_box%>
+               <%=b.text%>
+              <% end %>
+            <% end %>
+          </div>
+          <hr>
+
+          <div>
+            <%= f.submit form_title_order %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="card" style="width: 60%;">
+      <div class="card-header text-center">
+        <%= @order.customer.name %>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <table class="table table-hover my-5">
+            <thead class="thead">
+              <tr class="text-center">
+                <th scope="col-4">Producto(s)</th>
+                <th scope="col-3">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 15em;">
+                  <td class="metric col-4">
+                    <ul>
+                      <% @order.products.each do |order| %>
+                        <li>
+                          <%= order.code  %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <ul>
+                      <% @order.products.each do |order| %>
+                        <li>
+                          <%= number_to_currency(order.price, precision: 0) %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4">
+                    SUBTOTAL
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= number_to_currency(@order.subtotal, precision: 0) %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4">
+                    IVA
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= number_to_currency(@order.iva, precision: 0) %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="metric col-4">
+                    TOTAL
+                  </td>
+
+                  <td class="metric col-3 text-center">
+                    <%= number_to_currency(@order.total, precision: 0) %>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+          <footer class="blockquote-footer"><%= @order.vendor.name %></footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
