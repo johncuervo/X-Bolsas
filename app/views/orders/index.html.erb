@@ -29,7 +29,7 @@
               </td>
 
               <td class="metric col-3 text-center">
-                <%= order.total %>
+                <%= number_to_currency(order.total, precision: 0) %>
               </td>
 
               <td class="metric col-2 text-right align-bottom">

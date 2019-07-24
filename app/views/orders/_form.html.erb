@@ -17,9 +17,21 @@
         <%= form_for @order do |f| %>
 
           <div class="form-group">
-            <%= f.label "Cliente", class:"mr-3" %>
+            <h3><%= f.label "Cliente", class:"mr-3" %> </h3>
             <%= f.collection_select :customer_id, Customer.all, :id, :name %>
           </div>
+          <hr>
+
+          <div class="form-group pt-0">
+            <h3><%= f.label "Productos:", class:"mr-3" %></h3>
+            <%= f.collection_check_boxes(:product_ids, Product.all, :id, :code) do |b| %>
+             <%= b.label class:"label-checkbox mr-4" do %>
+               <%=b.check_box%>
+               <%=b.text%>
+              <% end %>
+            <% end %>
+          </div>
+          <hr>
 
           <div>
             <%= f.submit form_title_order %>
