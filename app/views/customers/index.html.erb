@@ -3,46 +3,27 @@
     <h2 class= "font-weight-bold">Clientes</h2>
     <% if vendor_signed_in? %>
     <span class="d-flex justify-content-end">
-      <%= link_to 'Nuevo Cliente', new_customer_path, class:"btn btn-primary" %>
+      <%= link_to 'Nuevo Cliente', new_customer_path, remote: true, class:"btn btn-primary" %>
     </span>
     <% end %>
   </div>
   <div class="row my-5">
+    <div class="table-responsive">
       <table class="table table-hover">
         <thead class="thead-dark">
-          <tr class="text-center">
-            <th scope="col-4">Nombre</th>
-            <th scope="col-3">Email</th>
-            <th scope="col-3">Tel/Cel</th>
-            <th scope="col-2"></th>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Tel/Cel</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @customers.each do |customer| %>
-            <tr>
-              <td class="metric col-4 text-center">
-                <%= customer.name %>
-              </td>
-
-              <td class="metric col-3 text-center">
-                <%= customer.email %>
-              </td>
-
-              <td class="metric col-3 text-center">
-                <%= customer.phone %>
-              </td>
-
-              <td class="metric col-2 text-right align-bottom">
-                <% if vendor_signed_in? && current_vendor.id == customer.vendor_id  %>
-                  <span class="metric-value">
-                    <%= link_to "", edit_customer_path(customer), class: "fas fa-edit mr-1"%>
-                    <%= link_to "", customer, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Cliente?' }  %>
-                  </span>
-                <% end %>
-              </td>
-            </tr>
+            <%= render "row", customer: customer %>
           <% end %>
         </tbody>
       </table>
+    </div>
   </div>
 </div>

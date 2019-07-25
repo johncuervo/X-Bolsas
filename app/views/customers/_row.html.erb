@@ -1,0 +1,13 @@
+<tr id="<%= customer.id %>">
+  <td><%= customer.name %></td>
+  <td><%= customer.email %></td>
+  <td><%= customer.phone %></td>
+  <td>
+    <% if vendor_signed_in? && current_vendor.id == customer.vendor_id  %>
+      <span class="metric-value">
+        <%= link_to "", edit_customer_path(customer), remote: true, class: "fas fa-edit mr-1"%>
+        <%= link_to "", customer, class: "fas fa-trash-alt mr-1", method: :delete, data: { confirm: 'Desea eliminar el Cliente?' }  %>
+      </span>
+    <% end %>
+  </td>
+</tr>
