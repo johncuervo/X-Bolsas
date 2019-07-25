@@ -11,7 +11,7 @@ class CustomersController < ApplicationController
     end
 
     def create
-      @customer = Customer.new(customer_params)
+      @customer = Customer.create(customer_params)
       @customer.vendor = current_vendor
       if @customer.save
         redirect_to customers_path, notice: 'Cliente creado correctamente.'

@@ -3,64 +3,32 @@
     <h2 class= "font-weight-bold">Productos (Medidas en cm)</h2>
     <% if vendor_signed_in? %>
     <span class="d-flex justify-content-end">
-      <%= link_to 'Nuevo Producto', new_product_path, class:"btn btn-primary" %>
+      <%= link_to 'Nuevo Producto', new_product_path, remote: true, class:"btn btn-primary" %>
     </span>
     <% end %>
   </div>
   <div class="row my-5">
+    <div class="table-responsive">
       <table class="table table-hover">
         <thead class="thead-dark">
-          <tr class="text-center">
-            <th scope="col-2">Codigo</th>
-            <th scope="col-2">Ancho</th>
-            <th scope="col-2">Alto</th>
-            <th scope="col-2">Valor Unidad</th>
-            <th scope="col-2">Cantidad Bolsas</th>
-            <th scope="col-1">Precio</th>
-            <th scope="col-1"></th>
+          <tr>
+            <th>Codigo</th>
+            <th>Ancho</th>
+            <th>Alto</th>
+            <th>Valor Unidad</th>
+            <th>Cantidad Bolsas</th>
+            <th>Precio</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @products.each do |product| %>
             <% product.update code: "B-#{product.width}#{product.height}-#{product.quantity}" %>
             <% product.update price: "#{product.unit * product.quantity}" %>
-
-            <tr>
-              <td class="metric col-2 text-center">
-                <%= product.code %>
-              </td>
-
-              <td class="metric col-2 text-center">
-                <%= product.width %>
-              </td>
-
-              <td class="metric col-2 text-center">
-                <%= product.height %>
-              </td>
-
-              <td class="metric col-2 text-center">
-                <%= number_to_currency(product.unit, precision: 0) %>
-              </td>
-
-              <td class="metric col-2 text-center">
-                <%= product.quantity %>
-              </td>
-
-              <td class="metric col-1 text-center">
-                <%= number_to_currency(product.price, precision: 0) %>
-              </td>
-
-              <td class="metric col-1 text-right align-bottom">
-                <% if vendor_signed_in? %>
-                  <span class="metric-value">
-                    <%= link_to "", edit_product_path(product), class: "fas fa-edit mr-1"%>
-                    <%= link_to "", product, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Producto?' }  %>
-                  </span>
-                <% end %>
-              </td>
-            </tr>
+            <%= render "row", product: product %>
           <% end %>
         </tbody>
       </table>
+    </div>
   </div>
 </div>

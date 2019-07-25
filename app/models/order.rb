@@ -20,8 +20,8 @@ class Order < ApplicationRecord
 
   def sumatoria
      suma = 0
-     self.products.each do |order|
-       suma = suma + order.price
+     self.products.each do |product|
+       suma = suma + product.price
      end
      self.update(subtotal: suma)
      self.update(iva: self.subtotal * 0.19)

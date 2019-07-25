@@ -8,6 +8,7 @@
     <% end %>
   </div>
   <div class="row my-5">
+    <div class="table-responsive">
       <table class="table table-hover">
         <thead class="thead-dark">
           <tr class="text-center">
@@ -29,14 +30,15 @@
               </td>
 
               <td class="metric col-3 text-center">
-                <%= number_to_currency(order.total, precision: 0) %>
+                <%=number_to_currency(order.total, precision: 0) %>
+                <%= link_to "", order_path(order), class: "fas fa-info-circle mr-1 float-right" %>
               </td>
 
               <td class="metric col-2 text-right align-bottom">
                 <% if vendor_signed_in? && current_vendor.id == order.vendor_id  %>
                   <span class="metric-value">
                     <%= link_to "", edit_order_path(order), class: "fas fa-edit mr-1"%>
-                    <%= link_to "", order, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar el Pedido?' }  %>
+                    <%= link_to "", order, class: "fas fa-trash-alt mr-1", method: :delete, data: { confirm: 'Desea eliminar el Pedido?' }  %>
                   </span>
                 <% end %>
               </td>
@@ -44,5 +46,6 @@
           <% end %>
         </tbody>
       </table>
+    </div>
   </div>
 </div>
