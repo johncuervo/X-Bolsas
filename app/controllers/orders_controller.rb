@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_vendor!, except: [:index]
+  before_action :authenticate_vendor!, except: [:index, :show]
 
     def index
       @orders = Order.all.order(created_at: :desc)
-      
     end
 
     def new
@@ -14,15 +13,16 @@ class OrdersController < ApplicationController
     def create
       @order = Order.new(order_params)
       @order.vendor = current_vendor
+      @order.sumatoria
       if @order.save
-        redirect_to order_path(@order), notice: 'Pedido creado correctamente.'
+        redirect_to orders_path, notice: 'Pedido creado correctamente.'
       else
         render :new
       end
     end
 
     def show
-      @order.sumatoria
+
     end
 
     def edit
@@ -30,7 +30,8 @@ class OrdersController < ApplicationController
 
     def update
       if @order.update(order_params)
-        redirect_to order_path, notice: 'Pedido editado correctamente.'
+        @order.sumatoria
+        redirect_to orders_path, notice: 'Pedido editado correctamente.'
       else
         render :edit
       end

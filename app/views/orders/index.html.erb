@@ -2,47 +2,27 @@
   <div class="row justify-content-between">
     <h2 class= "font-weight-bold">Pedidos</h2>
     <% if vendor_signed_in? %>
-    <span class="d-flex justify-content-end">
-      <%= link_to 'Nuevo Pedido', new_order_path, class:"btn btn-primary" %>
-    </span>
+      <span class="d-flex justify-content-end">
+        <%= link_to 'Nuevo Pedido', new_order_path, remote: true, class:"btn btn-primary" %>
+      </span>
     <% end %>
   </div>
   <div class="row my-5">
     <div class="table-responsive">
       <table class="table table-hover">
         <thead class="thead-dark">
-          <tr class="text-center">
-            <th scope="col-4">Vendedor</th>
-            <th scope="col-3">Cliente</th>
-            <th scope="col-3">Total</th>
-            <th scope="col-2"></th>
+          <tr>
+            <th>Vendedor</th>
+            <th>Cliente</th>
+            <th>Subtotal</th>
+            <th>Iva</th>
+            <th>Total</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @orders.each do |order| %>
-            <tr>
-              <td class="metric col-4 text-center">
-                <%= order.vendor.name %>
-              </td>
-
-              <td class="metric col-3 text-center">
-                <%= order.customer.name %>
-              </td>
-
-              <td class="metric col-3 text-center">
-                <%=number_to_currency(order.total, precision: 0) %>
-                <%= link_to "", order_path(order), class: "fas fa-info-circle mr-1 float-right" %>
-              </td>
-
-              <td class="metric col-2 text-right align-bottom">
-                <% if vendor_signed_in? && current_vendor.id == order.vendor_id  %>
-                  <span class="metric-value">
-                    <%= link_to "", edit_order_path(order), class: "fas fa-edit mr-1"%>
-                    <%= link_to "", order, class: "fas fa-trash-alt mr-1", method: :delete, data: { confirm: 'Desea eliminar el Pedido?' }  %>
-                  </span>
-                <% end %>
-              </td>
-            </tr>
+            <%= render "row", order: order %>
           <% end %>
         </tbody>
       </table>

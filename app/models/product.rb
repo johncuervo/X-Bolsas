@@ -14,5 +14,7 @@
 #
 
 class Product < ApplicationRecord
+  validates :width, :height, :unit, :quantity, presence: true
+  
   has_and_belongs_to_many :orders
 end

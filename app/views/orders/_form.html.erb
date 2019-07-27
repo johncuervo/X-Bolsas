@@ -1,67 +1,45 @@
-<div class="container my-5">
-  <% if @order.errors.any? %>
-    <div class="alert alert-danger">
-      <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="row justify-content-center">
+<div id="order-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= form_title_order %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= form_for @order, remote: true do |f| %>
+        <div class="modal-body">
 
-    <div class="card" style="width: 60%;">
-      <%= form_for @order do |f| %>
-        <div class="card-header text-center">
-          <h1 class="mb-4"><%= form_title_order %> </h1>
-          <%= f.collection_select :customer_id, Customer.all, :id, :name, {:prompt => 'Seleccione un Cliente'} %>
-        </div>
-        <div class="card-body">
-          <blockquote class="blockquote mb-0">
+          <% if @order.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+              <% @order.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="alert alert-danger" role="alert" style="display: none;"></div>
+
+          <div class="form-group">
+            <%= f.collection_select :customer_id, Customer.all, :id, :name, {:prompt => 'Seleccione un Cliente'} %>
+          </div>
+          <hr>
+          <div class="form-group">
+
+            <h3>Productos</h3>
             <%= f.collection_check_boxes(:product_ids, Product.all, :id, :code) do |b| %>
              <%= b.label class:"label-checkbox mr-4" do %>
                <%=b.check_box%>
                <%=b.text%>
               <% end %>
             <% end %>
-            <table class="table table-hover my-5">
-              <thead class="thead">
-                <tr class="text-center">
-                  <th scope="col-4">Producto(s)</th>
-                  <th scope="col-3">Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr style="height: 15em;">
-                    <td class="metric col-4">
-                      <ul>
-                        <% @order.products.each do |order| %>
-                          <li>
-                            <%= order.code  %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    </td>
+          </div>
+        <%= current_vendor.name %>
+        <div class="modal-footer">
 
-                    <td class="metric col-3 text-center">
-                      <ul>
-                        <% @order.products.each do |order| %>
-                          <li>
-                            <%= number_to_currency(order.price, precision: 0) %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    </td>
-                  </tr>
-              </tbody>
-            </table>
-            <footer class="blockquote-footer">
-              <%= current_vendor.name %>
-              <%= f.submit form_title_order, class: "btn btn-primary float-right" %>
-            </footer>
-          </blockquote>
+          <%= f.submit form_title_order, class: "btn btn-primary btn-lg btn-block" %>
         </div>
       <% end %>
-    </div>
-  </div>
-</div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -9,7 +9,6 @@
     <% if vendor_signed_in? %>
       <span class="metric-value">
         <%= link_to "", edit_product_path(product), remote: true, class: "fas fa-edit mr-1"%>
-        <%= link_to "", product, class: "fas fa-trash-alt mr-1", method: :delete, data: { confirm: 'Desea eliminar el Producto?' }  %>
       </span>
     <% end %>
   </td>
