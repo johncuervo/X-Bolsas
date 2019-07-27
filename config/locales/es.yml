@@ -9,11 +9,14 @@ es:
 
   activerecord:
     attributes:
-      post:
-        title: "Titulo"
-        content: "Contenido"
-      comment:
-        content: "Contenido"
+      customer:
+        name: "Nombre"
+        phone: "Telefono"
+      product:
+        width: "Ancho"
+        height: "Alto"
+        unit: "Valor Unidad"
+        quantity: "Cantidad"
 
   date:
     abbr_day_names:
@@ -168,7 +171,7 @@ es:
         separator: ","
         significant: false
         strip_insignificant_zeros: false
-        unit: "€"
+        unit: "$"
     format:
       delimiter: "."
       precision: 3

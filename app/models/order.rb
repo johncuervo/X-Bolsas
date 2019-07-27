@@ -15,7 +15,7 @@
 class Order < ApplicationRecord
   belongs_to :vendor
   belongs_to :customer
-  has_and_belongs_to_many :products
+  has_and_belongs_to_many :products, dependent: :destroy
 
 
   def sumatoria
