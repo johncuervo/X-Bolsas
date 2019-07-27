@@ -1,0 +1,18 @@
+<tr id="<%= order.id %>">
+  <td><%= order.vendor.name %></td>
+  <td><%= order.customer.name %></td>
+  <td><%= number_to_currency(order.subtotal, precision: 0) %></td>
+  <td><%= number_to_currency(order.iva, precision: 0) %></td>
+  <td>
+    <%= number_to_currency(order.total, precision: 0) %>
+    <%= link_to "", order_path(order), class: "fas fa-info-circle mr-1 float-right" %>
+  </td>
+  <td>
+    <% if vendor_signed_in? && current_vendor.id == order.vendor_id %>
+      <span class="metric-value">
+        <%= link_to "", edit_order_path(order), remote: true, class: "fas fa-edit mr-1"%>
+        <%= link_to "", order, class: "fas fa-trash-alt mr-1", method: :delete, data: { confirm: 'Desea eliminar el Pedido?' }  %>
+      </span>
+    <% end %>
+  </td>
+</tr>

@@ -12,6 +12,8 @@
 #
 
 class Customer < ApplicationRecord
+  validates :name, :email, :phone, presence: true
+  
   belongs_to :vendor
   has_many :orders
 end
